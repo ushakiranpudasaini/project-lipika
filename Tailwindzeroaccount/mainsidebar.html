@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html class="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                },
+                fontFamily: {
+                    poppins: ['Poppins', 'sans-serif'],
+                    Montserrat: ['Montserrat', 'sans-serif']
+                },
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        @media (max-width: 400px) {
+            .sidebar.close .nav-links li .sub-menu {
+                display: none;
+            }
+
+            .sidebar {
+                width: 78px;
+            }
+
+            .sidebar.close {
+                width: 0;
+            }
+
+            .home-section {
+                left: 78px;
+                width: calc(100% - 78px);
+                z-index: 100;
+            }
+
+
+            .sidebar.close~.home-section {
+                left: 0;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .sidebar.close~.home-section {
+                left: 0 !important;
+                width: 100% !important;
+            }
+
+            .sidebar.close {
+                display: none;
+            }
+
+        }
+
+        @media (max-width: 760px) {
+            .sidebar.close~.home-section {
+                left: 0 !important;
+                width: 100% !important;
+            }
+
+            .sidebar.close {
+                display: none;
+            }
+
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 260px;
+            background: #fff;
+            z-index: 100;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close {
+            width: 78px;
+        }
+
+        /* .sidebar .logo-details {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+} */
+
+        .sidebar .logo-details i {
+            font-size: 30px;
+            /* color: #000; */
+            height: 50px;
+            min-width: 78px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .sidebar .logo-details .logo_name {
+            font-size: 22px;
+            /* color: #000; */
+            font-weight: 600;
+            transition: 0.3s ease;
+            transition-delay: 0.1s;
+        }
+
+        .sidebar.close .logo-details .logo_name {
+            transition-delay: 0s;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar .nav-links {
+            height: 100%;
+            padding: 24px 0 144px 6px;
+            overflow: auto;
+            position: relative;
+        }
+
+        .sidebar.close .nav-links {
+            overflow: visible;
+        }
+
+        .sidebar .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* .sidebar .nav-links li {
+
+            list-style: none;
+            transition: all 0.4s ease;
+             border-bottom: 1px solid #80808014; 
+        padding: 2px 0px 2px 0px;
+        }
+
+        */
+        /* .sidebar .nav-links li:hover {
+    background: #dedede4a;
+} */
+
+        .sidebar .sub-menu li:hover {
+            background: #80808000;
+        }
+
+        .sidebar .nav-links li .iocn-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar.close .nav-links li .iocn-link {
+            display: block
+        }
+
+
+
+        .sidebar .nav-links li i {
+            height: 50px;
+            min-width: 56px;
+            text-align: center;
+            line-height: 50px;
+            /* color: #000; */
+            font-size: 23px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* .sidebar .nav-links li svg {
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: #000;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+} */
+        /* .sidebar .nav-links .hasSubMenu svg{
+    height: 20px;
+    min-width: 20px;
+    text-align: center;
+    
+    color: #000;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+} */
+
+        .sidebar .nav-links .hasSubMenu {
+            color: #000;
+        }
+
+        .sidebar .nav-links .hasSub:hover {
+            color: #6366F1;
+
+        }
+
+        .sidebar .nav-links .hasSub {
+            padding: 0 2px 0 2px;
+        }
+
+        /* .sidebar .nav-links .hasSubMenu:hover{
+    background-color: #80808014;
+} */
+        .sidebar .nav-links li.showMenu i.arrow {
+            transform: rotate(-180deg);
+        }
+
+        .sidebar.close .nav-links i.arrow {
+            display: none;
+        }
+
+        .sidebar .nav-links li a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .sidebar .nav-links li a .link_name {
+            font-size: 16px;
+            font-weight: 400;
+            /* color: #000; */
+            transition: all 0.4s ease;
+        }
+
+        .sidebar.close .nav-links li a .link_name {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar .nav-links li .sub-menu {
+            padding: 6px 16px 14px 52px;
+            /* margin-top: -10px; */
+            /* background: #fff;  */
+            box-shadow: 0 4px 20px 1px rgba(0, 0, 0, .06), 0 1px 4px rgba(0, 0, 0, .08);
+            display: none;
+            height: 100%;
+            border: 1px solid #80808014;
+            width: 260px;
+        }
+
+        .sidebar .nav-links li.showMenu .sub-menu {
+            display: block;
+        }
+
+        .sidebar .nav-links li .sub-menu a {
+            /* color: #000000a3; */
+            font-size: 15px;
+            padding: 8px 0;
+            white-space: nowrap;
+
+            transition: all 0.3s ease;
+        }
+
+        /* .sidebar .nav-links li .sub-menu a:hover {
+    color:#6366F1;
+} */
+
+        .sidebar.close .nav-links li .sub-menu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            opacity: 0;
+            display: block;
+            pointer-events: none;
+            transition: 0s;
+        }
+
+        .sidebar.close .nav-links li:hover .sub-menu {
+            top: 0;
+            opacity: 1;
+            pointer-events: auto;
+            transition: all 0.4s ease;
+        }
+
+        .sidebar .nav-links li .sub-menu .link_name {
+            display: none;
+        }
+
+        .sidebar.close .nav-links li .sub-menu .link_name {
+            font-size: 18px;
+            opacity: 1;
+            display: block;
+        }
+
+        .sidebar .nav-links li .sub-menu.blank {
+            opacity: 1;
+            pointer-events: auto;
+            padding: 3px 20px 6px 16px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar .nav-links li:hover .sub-menu.blank {
+            top: 51%;
+            transform: translateY(-50%);
+        }
+
+        .sidebar .profile-details {
+            position: fixed;
+            bottom: 0;
+            width: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1d1b31;
+            padding: 12px 0;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close .profile-details {
+            background: none;
+        }
+
+        .sidebar.close .profile-details {
+            width: 78px;
+        }
+
+        .sidebar .profile-details .profile-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar .profile-details img {
+            height: 52px;
+            width: 52px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 0 14px 0 12px;
+            background: #1d1b31;
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close .profile-details img {
+            padding: 10px;
+        }
+
+        .sidebar .profile-details .profile_name,
+        .sidebar .profile-details .job {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .sidebar.close .profile-details i,
+        .sidebar.close .profile-details .profile_name,
+        .sidebar.close .profile-details .job {
+            display: none;
+        }
+
+        .sidebar .profile-details .job {
+            font-size: 12px;
+        }
+
+        .home-section {
+            position: relative;
+
+            height: 100vh;
+            left: 260px;
+            width: calc(100% - 260px);
+            transition: all 0.5s ease;
+        }
+
+        .sidebar.close~.home-section {
+            left: 78px;
+            width: calc(100% - 78px);
+        }
+
+        /* .home-section .home-content {
+    height: 40px;
+    display: flex;
+    align-items: center;
+} */
+
+        .home-section .home-content .bx-menu,
+        .home-section .home-content .text {
+            /* color: #11101d; */
+            font-size: 35px;
+        }
+
+        .home-section .home-content .bx-menu {
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        .home-section .home-content .text {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        /* ---------- Sidebar List ---------- */
+        .nav-links {
+            height: 100%;
+            padding: 30px 0 150px 0;
+            overflow: auto;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* .nav-links li {
+            transition: all .5s ease;
+        } */
+
+        /* .nav-links li:hover {
+            background-color: var(--color_Dark2);
+        } */
+
+        /* .nav-links li .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all .5s ease;
+            cursor: pointer;
+        } */
+
+        .nav-links li.active .title {
+            background-color: var(--color_Blue);
+        }
+
+        .nav-links li.active .bxs-chevron-down {
+            transition: all .5s ease;
+            transform: rotate(180deg);
+        }
+
+        .nav-links li .title .link {
+            display: flex;
+            align-items: center;
+        }
+
+        /* .nav-links li .title i {
+            height: 50px;
+            min-width: 78px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--color_Light1);
+            font-size: 20px;
+        } */
+
+        .nav-links li .title .name {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--color_Light1);
+        }
+
+        /* ---------------- Submenu ------------- */
+        .nav-links li .submenu {
+            width: 0;
+            height: 0;
+            opacity: 0;
+            /* transition: all .5s ease; */
+        }
+
+        .nav-links li.dropdown.active .submenu {
+            width: 100%;
+            height: unset;
+            opacity: 1;
+            display: flex;
+            flex-direction: column;
+
+        }
+
+        .submenu .link {
+            color: var(--color_Light2);
+            font-size: 15px;
+            padding: 5px 0;
+            /* transition: all .5s ease; */
+        }
+
+        .submenu .link:hover {
+            color: #fff;
+        }
+
+        .submenu-title {
+            display: none;
+        }
+
+        /* ---------------- Submenu Close ------------- */
+        .sidebar.close .logo-name,
+        .sidebar.close .title .name,
+        .sidebar.close .title .bxs-chevron-down {
+            display: none;
+        }
+
+        .sidebar.close .nav-links {
+            overflow: visible;
+        }
+
+        .sidebar.close .nav-links li {
+            position: relative;
+        }
+
+        /* .sidebar.close .nav-links li .submenu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            height: max-content;
+            width: max-content;
+            opacity: 0;
+            transition: all .5s ease;
+            pointer-events: none;
+        } */
+
+        .sidebar.close .nav-links li:hover .submenu {
+            opacity: 1;
+            top: 0;
+            pointer-events: initial;
+            background-color: var(--color_Dark2);
+        }
+
+        .sidebar.close .submenu-title {
+            display: block;
+            font-style: 18px;
+            color: var(--color_Light1);
+        }
+
+        .sidebar.close .nav-links li .submenu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            height: max-content;
+            width: max-content;
+            opacity: 0;
+            transition: all .5s ease;
+            pointer-events: none;
+        }
+    </style>
+
+</head>
+
+<body class="dark:bg-gray-900 bg-[#EEF2F7]">
+    <div class="bg-[#EEF2F7] font-poppins dark:bg-gray-800">
+        <div class="lg:block hidden sidebar close dark:bg-gray-900">
+            <div class="logo-details">
+                <a href="journal voucher.html" class="dark:text-white"><i class="bx bx-pie-chart-alt-2"></i></a>
+                <a href="journal voucher.html" class=""> <span class="logo_name dark:text-white">Lipika </span></a>
+            </div>
+            <ul class="nav-links ">
+                <li
+                    class="dark:hover:bg-gray-900  hover:bg-indigo-100 hover:text-indigo-600 border-gray-100 dark:border-gray-700 border-b">
+                    <a href="index.html" class="dark:text-white  ">
+                        <i class='bx bx-home-circle '></i>
+                        <span class="link_name dark:text-gray-300">Dashboard</span>
+                    </a>
+                </li>
+                <li class="dropdown ">
+                    <div
+                        class="title flex justify-between items-center transition-all cursor-pointer dark:hover:bg-gray-900  hover:bg-indigo-100 hover:text-indigo-600 border-gray-100 dark:border-gray-700 border-b">
+                        <a href="#" class="link">
+                            <i class='bx bx-store'></i>
+                            <span class="name">Inventory</span>
+                        </a>
+                        <i class="bx bxs-chevron-down"></i>
+                    </div>
+
+                    <ul class="submenu  dark:bg-gray-900 bg-white">
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="purchaseentry.html"
+                                class="dark:text-gray-400 flex  dark:text-ingigo-600 justify-between font-medium text-gray-700">
+
+                                Purchase Entry
+                                <span>
+                                </span></a>
+                        </li>
+
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="salesinvoice.html"
+                                class="dark:text-gray-400 flex justify-between font-medium text-gray-700">
+                                Sale Entry
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="stockin.html"
+                                class="flex justify-between dark:text-gray-400 font-medium text-gray-700">
+                                Stock In
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="stockout.html"
+                                class="flex justify-between dark:text-gray-400 font-medium text-gray-700">
+                                Stock Out
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="manufacturinginvoice.html"
+                                class="flex dark:text-gray-400 justify-between font-medium text-gray-700">
+                                Manufacturing Invoice
+                                <span>
+                                </span></a>
+                        </li>
+                    </ul>
+                    <!-- <ul class="sub-menu dark:bg-gray-900 bg-white">
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="purchaseentry.html"
+                                class="dark:text-gray-400 flex  dark:text-ingigo-600 justify-between font-medium text-gray-700">
+
+                                Purchase Entry
+                                <span>
+                                </span></a>
+                        </li>
+
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="salesinvoice.html"
+                                class="dark:text-gray-400 flex justify-between font-medium text-gray-700">
+                                Sale Entry
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="stockin.html"
+                                class="flex justify-between dark:text-gray-400 font-medium text-gray-700">
+                                Stock In
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="stockout.html"
+                                class="flex justify-between dark:text-gray-400 font-medium text-gray-700">
+                                Stock Out
+                                <span>
+                                </span></a>
+                        </li>
+                        <li class=" border-gray-100 dark:border-gray-700 border-b">
+
+                            <a href="manufacturinginvoice.html"
+                                class="flex dark:text-gray-400 justify-between font-medium text-gray-700">
+                                Manufacturing Invoice
+                                <span>
+                                </span></a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+        </div>
+        <section class="home-section dark:bg-gray-800">
+            <section
+                class="border-b dark:border-gray-700 sticky top-0 z-40 px-3 py-2.5 bg-white  dark:text-gray-100 dark:bg-gray-900 lg:px-5">
+                <nav class="relative">
+                    <div class="flex flex-wrap  items-center  justify-between">
+                        <div class="home-content lg:block hidden"> <i class='bx bx-menu dark:text-gray-400'></i></div>
+                        <div class="bg-[url('unsplash.jpg')] bg-cover" x-data="{ openMenu : false }"
+                            :class="openMenu ? 'overflow-hidden' : 'overflow-visible' ">
+                            <style>
+                                [x-cloak] {
+                                    display: none !important;
+                                }
+                            </style>
+                            <header class="items-center justify-between px-4 lg:px-0 lg:flex drop-shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <button class="flex flex-col items-center align-middle lg:hidden "
+                                        @click="openMenu = !openMenu" :aria-expanded="openMenu"
+                                        aria-controls="mobile-navigation" aria-label="Navigation Menu"
+                                        aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="w-6 h-6 text-gray-700 dark:text-gray-400" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6h16M4 12h16M4 18h16"></path>
+                                        </svg>
+                                    </button>
+
+                                </div>
+
+                            </header>
+                            <nav id="mobile-navigation"
+                                class="fixed top-0 bottom-0 left-0 right-0 z-[100px] text-gray-100 bg-[#00000063]"
+                                :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+                                <!-- UL Links -->
+                                <ul class="absolute top-0 bottom-0 left-0 right-0 z-10 py-8 transition-all bg-white dark:bg-gray-800 w-96 drop-shadow-2xl"
+                                    :class="closemenu ? 'translate-x-0' : 'translate-x-full'">
+                                    <li
+                                        class="text-gray-700 border-b dark:border-gray-700 dark:text-gray-300 dark:hover:text-gray-100 hover:bg-gray-100 dark:bg-gray-800 border-inherit">
+                                        <a href="index.html" class="block p-4">Dashboard</a>
+                                    </li>
+
+
+                                    <li x-data="{ open: false }"
+                                        class="relative text-gray-700 border-b dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border-inherit">
+                                        <a href="javascript:void(0)" @click="open = ! open"
+                                            class="flex items-center p-4 text-gray-700 dark:hover:text-gray-100 group dark:text-gray-300 hover:text-blue-500">
+                                            <span> Inventory </span>
+                                            <span
+                                                class="inline-block ml-auto  absolute right-0  left-[19rem] sidenav-arrow">
+                                                <svg class="w-3 h-3 group-" viewBox="0 0 10 6" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                    <path
+                                                        d="M9.08329 0.666626C8.74996 0.333293 8.24996 0.333293 7.91663 0.666626L4.99996 3.58329L2.08329 0.666626C1.74996 0.333293 1.24996 0.333293 0.916626 0.666626C0.583293 0.999959 0.583293 1.49996 0.916626 1.83329L4.41663 5.33329C4.58329 5.49996 4.74996 5.58329 4.99996 5.58329C5.24996 5.58329 5.41663 5.49996 5.58329 5.33329L9.08329 1.83329C9.41663 1.49996 9.41663 0.999959 9.08329 0.666626Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="transition border-gray-500 dark:bg-gray-900 dropdown-section nested-menu"
+                                            x-show="open">
+                                            <ul
+                                                class="pl-3 ml-3 text-sm font-medium divide-y divide-gray-300 dark:divide-gray-600 divide-dashed">
+                                                <li class="flex group">
+                                                    <a href="blog.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Purchase Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Sales Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock In
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock Out
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Manufacturing Invoice
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li x-data="{ open: false }"
+                                        class="relative text-gray-700 border-b dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border-inherit">
+                                        <a href="javascript:void(0)" @click="open = ! open"
+                                            class="flex items-center p-4 text-gray-700 dark:hover:text-gray-100 group dark:text-gray-300 hover:text-blue-500">
+                                            <span> Voucher </span>
+                                            <span
+                                                class="inline-block ml-auto  absolute right-0  left-[19rem] sidenav-arrow">
+                                                <svg class="w-3 h-3 group-" viewBox="0 0 10 6" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                    <path
+                                                        d="M9.08329 0.666626C8.74996 0.333293 8.24996 0.333293 7.91663 0.666626L4.99996 3.58329L2.08329 0.666626C1.74996 0.333293 1.24996 0.333293 0.916626 0.666626C0.583293 0.999959 0.583293 1.49996 0.916626 1.83329L4.41663 5.33329C4.58329 5.49996 4.74996 5.58329 4.99996 5.58329C5.24996 5.58329 5.41663 5.49996 5.58329 5.33329L9.08329 1.83329C9.41663 1.49996 9.41663 0.999959 9.08329 0.666626Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="transition border-gray-500 dark:bg-gray-900 dropdown-section nested-menu"
+                                            x-show="open">
+                                            <ul
+                                                class="pl-3 ml-3 text-sm font-medium divide-y divide-gray-300 dark:divide-gray-600 divide-dashed">
+                                                <li class="flex group">
+                                                    <a href="blog.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Purchase Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Sales Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock In
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock Out
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Manufacturing Invoice
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li x-data="{ open: false }"
+                                        class="relative text-gray-700 border-b dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border-inherit">
+                                        <a href="javascript:void(0)" @click="open = ! open"
+                                            class="flex items-center p-4 text-gray-700 dark:hover:text-gray-100 group dark:text-gray-300 hover:text-blue-500">
+                                            <span> Reports </span>
+                                            <span
+                                                class="inline-block ml-auto  absolute right-0  left-[19rem] sidenav-arrow">
+                                                <svg class="w-3 h-3 group-" viewBox="0 0 10 6" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                    <path
+                                                        d="M9.08329 0.666626C8.74996 0.333293 8.24996 0.333293 7.91663 0.666626L4.99996 3.58329L2.08329 0.666626C1.74996 0.333293 1.24996 0.333293 0.916626 0.666626C0.583293 0.999959 0.583293 1.49996 0.916626 1.83329L4.41663 5.33329C4.58329 5.49996 4.74996 5.58329 4.99996 5.58329C5.24996 5.58329 5.41663 5.49996 5.58329 5.33329L9.08329 1.83329C9.41663 1.49996 9.41663 0.999959 9.08329 0.666626Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="transition border-gray-500 dark:bg-gray-900 dropdown-section nested-menu"
+                                            x-show="open">
+                                            <ul
+                                                class="pl-3 ml-3 text-sm font-medium divide-y divide-gray-300 dark:divide-gray-600 divide-dashed">
+                                                <li class="flex group">
+                                                    <a href="blog.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Purchase Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Sales Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock In
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock Out
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Manufacturing Invoice
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li x-data="{ open: false }"
+                                        class="relative text-gray-700 border-b dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border-inherit">
+                                        <a href="javascript:void(0)" @click="open = ! open"
+                                            class="flex items-center p-4 text-gray-700 dark:hover:text-gray-100 group dark:text-gray-300 hover:text-blue-500">
+                                            <span> Account Settingss </span>
+                                            <span
+                                                class="inline-block ml-auto  absolute right-0  left-[19rem] sidenav-arrow">
+                                                <svg class="w-3 h-3 group-" viewBox="0 0 10 6" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                    <path
+                                                        d="M9.08329 0.666626C8.74996 0.333293 8.24996 0.333293 7.91663 0.666626L4.99996 3.58329L2.08329 0.666626C1.74996 0.333293 1.24996 0.333293 0.916626 0.666626C0.583293 0.999959 0.583293 1.49996 0.916626 1.83329L4.41663 5.33329C4.58329 5.49996 4.74996 5.58329 4.99996 5.58329C5.24996 5.58329 5.41663 5.49996 5.58329 5.33329L9.08329 1.83329C9.41663 1.49996 9.41663 0.999959 9.08329 0.666626Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="transition border-gray-500 dark:bg-gray-900 dropdown-section nested-menu"
+                                            x-show="open">
+                                            <ul
+                                                class="pl-3 ml-3 text-sm font-medium divide-y divide-gray-300 dark:divide-gray-600 divide-dashed">
+                                                <li class="flex group">
+                                                    <a href="blog.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Purchase Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Sales Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock In
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock Out
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Manufacturing Invoice
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li x-data="{ open: false }"
+                                        class="relative text-gray-700 border-b dark:text-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 border-inherit">
+                                        <a href="javascript:void(0)" @click="open = ! open"
+                                            class="flex items-center p-4 text-gray-700 dark:hover:text-gray-100 group dark:text-gray-300 hover:text-blue-500">
+                                            <span> General Settingss </span>
+                                            <span
+                                                class="inline-block ml-auto  absolute right-0  left-[19rem] sidenav-arrow">
+                                                <svg class="w-3 h-3 group-" viewBox="0 0 10 6" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg" data-config-id="auto-svg-3-1">
+                                                    <path
+                                                        d="M9.08329 0.666626C8.74996 0.333293 8.24996 0.333293 7.91663 0.666626L4.99996 3.58329L2.08329 0.666626C1.74996 0.333293 1.24996 0.333293 0.916626 0.666626C0.583293 0.999959 0.583293 1.49996 0.916626 1.83329L4.41663 5.33329C4.58329 5.49996 4.74996 5.58329 4.99996 5.58329C5.24996 5.58329 5.41663 5.49996 5.58329 5.33329L9.08329 1.83329C9.41663 1.49996 9.41663 0.999959 9.08329 0.666626Z"
+                                                        fill="currentColor"></path>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                        <div class="transition border-gray-500 dark:bg-gray-900 dropdown-section nested-menu"
+                                            x-show="open">
+                                            <ul
+                                                class="pl-3 ml-3 text-sm font-medium divide-y divide-gray-300 dark:divide-gray-600 divide-dashed">
+                                                <li class="flex group">
+                                                    <a href="blog.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Purchase Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Sales Entry
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock In
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Stock Out
+                                                        </span></a>
+                                                </li>
+                                                <li class="flex group">
+                                                    <a href="blog-details.html"
+                                                        class="flex items-center py-2 mr-4 no-underline group-hover:text-blue-600 dark:group-hover:text-gray-100 dark:text-gray-400 ">
+                                                        <span
+                                                            class="ml-2 text-sm text-gray-500 dark:group-hover:text-gray-100 group-hover:text-blue-600 dark:text-gray-400 ">
+                                                            Manufacturing Invoice
+                                                        </span></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- Close Button -->
+                                <button class="absolute top-0 bottom-0 right-0 z-10 left-80"
+                                    @click="openMenu = !openMenu" :aria-expanded="openMenu"
+                                    aria-controls="mobile-navigation" aria-label="Close Navigation Menu">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="absolute w-6 h-6 text-gray-700 dark:text-gray-300 hover:text-blue-600 top-2 left-2"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </nav>
+                        </div>
+                        <div class="hidden lg:flex items-center">
+                            <div class=" flex flex-wrap items-center justify-start">
+                                <div class="group relative inline-block mr-4">
+                                    <button
+                                        class=" inline-flex  text-base font-semibold dark:text-gray-300 text-gray-700 hover:text-indigo-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="w-5 h-5 bi bi-envelope" viewBox="0 0 16 16">
+                                            <path
+                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded bg-black py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100">
+                                        <span
+                                            class="absolute top-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-black"></span>
+                                        G-mail
+                                    </div>
+                                </div>
+                                <div class="group relative inline-block mr-4">
+                                    <button
+                                        class=" inline-flex  text-base font-semibold  dark:text-gray-300 text-gray-700 hover:text-indigo-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="w-5 h-5 bi bi-calendar-week" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z">
+                                            </path>
+                                            <path
+                                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded bg-black py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100">
+                                        <span
+                                            class="absolute top-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-black"></span>
+                                        Calendar
+                                    </div>
+                                </div>
+                                <div class="group relative inline-block mr-4">
+                                    <button
+                                        class=" inline-flex  text-base font-semibold text-gray-700  dark:text-gray-300 hover:text-indigo-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="w-5 h-5 bi bi-chat-left-dots"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
+                                            </path>
+                                            <path
+                                                d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                    <div
+                                        class="absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded bg-black py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100">
+                                        <span
+                                            class="absolute top-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-black"></span>
+                                        Message
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="hidden lg:flex items-center">
+                            <div class="pr-3  ">
+                                <select name="" id=""
+                                    class="block w-auto p-2 text-base bg-gray-100  dark:border-gray-700 border border-gray-300 rounded-md cursor-pointer dark:text-gray-400 dark:bg-gray-900">
+                                    <option value="">Tathaastu Mobile Pvt. Ltd.</option>
+                                    <option value="">Sort by Popularity</option>
+                                    <option value="">Sort by Price</option>
+                                </select>
+                            </div>
+                            <div class="pr-3 ">
+                                <select name="" id=""
+                                    class="block w-auto p-2 text-base bg-gray-100 border dark:border-gray-700 border-gray-300 rounded-md cursor-pointer dark:text-gray-400 dark:bg-gray-900">
+                                    <option value="">2079/2080.</option>
+                                    <option value="">2079/2080</option>
+                                    <option value="">2079/2080</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class=" flex items-center">
+                            <div class="relative -z-50 mr-4 text-left lg:inline-block" x-data="{ open: false }">
+                                <div class="lg:block" @click="open = ! open">
+                                    <button class="flex items-center">
+
+
+                                        <span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                fill="currentColor" class="text-gray-400" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div x-show="open" id="dropdown_profile"
+                                    class="absolute right-0 w-64 mt-5 origin-top-right bg-white rounded shadow dark:bg-gray-800 dark:text-gray-100 dark:bg-gray-900"
+                                    style="display: none;">
+                                    <div class="py-2">
+                                        <a href="#"
+                                            class="flex items-center px-4 py-3 border-b dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1"
+                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=334&amp;q=80"
+                                                alt="avatar">
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mx-2">
+                                                <span class="font-bold" href="#">Sara Salah</span> replied on the <span
+                                                    class="font-bold text-indigo-500" href="#">Upload Image</span>
+                                                artical . 2m
+                                            </p>
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-3 border-b hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-700  -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1"
+                                                src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
+                                                alt="avatar">
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mx-2">
+                                                <span class="font-bold" href="#">Slick Net</span> start following you .
+                                                45m
+                                            </p>
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-3 border-b hover:bg-gray-100 dark:hover:bg-gray-700 dark:border-gray-700  -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1"
+                                                src="https://images.unsplash.com/photo-1450297350677-623de575f31c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=334&amp;q=80"
+                                                alt="avatar">
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mx-2">
+                                                <span class="font-bold" href="#">Jane Doe</span> Like Your reply on
+                                                <span class="font-bold text-indigo-500" href="#">Test with TDD</span>
+                                                artical . 1h
+                                            </p>
+                                        </a>
+                                        <a href="#"
+                                            class="flex items-center px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 -mx-2">
+                                            <img class="h-8 w-8 rounded-full object-cover mx-1"
+                                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=398&amp;q=80"
+                                                alt="avatar">
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mx-2">
+                                                <span class="font-bold" href="#">Abigail Bennett</span> start following
+                                                you . 3h
+                                            </p>
+                                        </a>
+                                    </div><a href="#"
+                                        class="block bg-gray-800 text-white text-center font-bold py-2">See
+                                        all
+                                        notifications</a>
+                                </div>
+                            </div>
+                            <div class="relative -z-50 text-left lg:inline-block" x-data="{ open: false }">
+                                <div class="lg:block" @click="open = ! open">
+                                    <button class="flex items-center">
+                                        <div class="hidden mr-3 text-right md:block">
+                                            <a href="#" class="text-sm font-bold text-black  dark:text-gray-400"> John
+                                                Doe
+                                            </a>
+                                        </div>
+                                        <div class="mr-2">
+                                            <img src="https://i.postimg.cc/pr2Q6n1w/pexels-italo-melo-2379005.jpg"
+                                                class="object-cover object-right w-10 h-10 rounded-full" alt="person">
+                                        </div>
+                                        <span>
+                                            <svg class="text-gray-400" width="10" height="6" viewBox="0 0 10 6"
+                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M9.08335 0.666657C8.75002 0.333323 8.25002 0.333323 7.91669 0.666657L5.00002 3.58332L2.08335 0.666657C1.75002 0.333323 1.25002 0.333323 0.916687 0.666657C0.583354 0.99999 0.583354 1.49999 0.916687 1.83332L4.41669 5.33332C4.58335 5.49999 4.75002 5.58332 5.00002 5.58332C5.25002 5.58332 5.41669 5.49999 5.58335 5.33332L9.08335 1.83332C9.41669 1.49999 9.41669 0.99999 9.08335 0.666657Z"
+                                                    fill="currentColor"></path>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                </div>
+                                <div x-show="open" id="dropdown_profile"
+                                    class="absolute right-0 w-48 mt-3 origin-top-right bg-white rounded shadow dark:bg-gray-800 dark:text-gray-100 dark:bg-gray-700"
+                                    style="display: none;">
+                                    <div class="py-1">
+                                        <a href="#"
+                                            class="flex px-4 py-2 text-sm text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 hover:bg-gray-100">
+                                            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <path
+                                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                                </path>
+                                            </svg>
+                                            Account
+                                        </a>
+                                        <a href="#"
+                                            class="flex px-4 py-2 text-sm text-gray-700 dark:hover:bg-gray-800 dark:text-gray-400 hover:bg-gray-100">
+                                            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                                <polyline points="16 17 21 12 16 7"></polyline>
+                                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                                            </svg>
+                                            Logout
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+
+        </section>
+
+    </div>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        const listItems = document.querySelectorAll(".nav-links li");
+
+        listItems.forEach((item) => {
+            item.addEventListener("click", () => {
+                let isActive = item.classList.contains("active");
+
+                listItems.forEach((el) => {
+                    el.classList.remove("active");
+                });
+
+                if (isActive) item.classList.remove("active");
+                else item.classList.add("active");
+            });
+        });
+
+    </script>
+    <script src="assets/js/menu.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</body>
+
+</html>
